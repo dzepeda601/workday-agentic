@@ -1,4 +1,4 @@
-import { fetchPlaceholders } from '../../scripts/shared.js';
+import { fetchPlaceholders, resolveFragmentIcons } from '../../scripts/shared.js';
 
 /*
  * Header: drill-down flyout navigation built from the /nav fragment.
@@ -70,6 +70,7 @@ async function loadFragment() {
   if (!resp.ok) return null;
   const tpl = document.createElement('template');
   tpl.innerHTML = await resp.text();
+  resolveFragmentIcons(tpl.content);
   return tpl.content;
 }
 
@@ -421,13 +422,14 @@ export default async function decorate(block) {
   nav.setAttribute('aria-expanded', 'false');
 
   const brandLink = brand.querySelector('a');
+  const brandLabel = brandLink.querySelector('img')?.alt || brandLink.textContent.trim();
   const logo = el('a', 'nav-brand', [...brandLink.querySelectorAll('img')].map((i) => {
     i.width = 102;
     i.height = 48;
     return i;
   }));
   logo.href = brandLink.getAttribute('href');
-  logo.setAttribute('aria-label', brandLink.querySelector('img')?.alt || '');
+  if (brandLabel) logo.setAttribute('aria-label', brandLabel);
 
   const ctxBack = el('button', 'nav-context-back');
   ctxBack.type = 'button';

@@ -15,11 +15,12 @@
  *
  * The Region & Language list is rendered on the source only after clicking the globe, so it is
  * captured once (migration-work/navigation-validation/source-language-tree.json) and embedded here.
- * Icons are downloaded to content/images/nav/ and referenced relatively.
+ * Logo and UI icons are SVGs served from the code bus (/icons) and referenced with the EDS icon
+ * shorthand ":name:" followed by their label (used as alt text / accessible name). SVGs cannot be
+ * served from content (Document Authoring / media bus), so they are not referenced as images.
  */
 
 const TOP_LEVEL = ['Products', 'Industries', 'Customers', 'Resources', 'Partners', 'Company'];
-const IMG = 'images/nav/';
 
 const LANGUAGE_TREE = [
   {
@@ -412,8 +413,9 @@ function link(document, a) {
   return el(document, 'a', { href: a.getAttribute('href') }, [text(a)]);
 }
 
-function img(document, file, alt) {
-  return el(document, 'img', { src: `${IMG}${file}`, alt });
+/** Icon shorthand + label, e.g. ":wd-system-globe:Language and Region Selector". */
+function icon(name, label) {
+  return `:${name}:${label}`;
 }
 
 /** Level-2 details list (inside a level-1 submenu). */
@@ -472,7 +474,7 @@ export default {
     const hr = () => root.append(el(document, 'hr'));
 
     // 1. brand
-    root.append(el(document, 'p', {}, [el(document, 'a', { href: '/' }, [img(document, 'workday-logo.svg', 'Workday')])]));
+    root.append(el(document, 'p', {}, [el(document, 'a', { href: '/' }, [icon('workday-logo', 'Workday')])]));
     hr();
 
     // 2. navigation
@@ -490,7 +492,7 @@ export default {
 
     // 3. language
     const langBtn = document.querySelector('.language-toggle');
-    root.append(el(document, 'p', {}, [img(document, 'wd-system-globe.svg', langBtn.getAttribute('aria-label') || 'Language and Region Selector')]));
+    root.append(el(document, 'p', {}, [icon('wd-system-globe', langBtn.getAttribute('aria-label') || 'Language and Region Selector')]));
     root.append(el(document, 'p', {}, [el(document, 'strong', {}, ['Region & Language'])]));
     root.append(el(document, 'p', {}, ['Current website: ', el(document, 'strong', {}, ['United States (English)'])]));
     root.append(el(document, 'ul', {}, LANGUAGE_TREE.map((r) => el(document, 'li', {}, [
@@ -507,8 +509,8 @@ export default {
     const sign = document.querySelector('.cmp-sign-in-menu');
     // toggle icon + the mobile menu label ("Sign in") from the source's mobile-only nav entry
     const signLabel = text([...nav.querySelectorAll(':scope > ul > li.mobile-only button')].find((b) => b.closest('.cmp-sign-in')));
-    root.append(el(document, 'p', {}, [img(document, 'wd-system-user.svg', signBtn.getAttribute('aria-label') || 'Sign in options'), signLabel]));
-    root.append(el(document, 'p', {}, [img(document, 'wd-accent-life-saver.svg', 'Sign-in help')]));
+    root.append(el(document, 'p', {}, [icon('wd-system-user', signLabel || signBtn.getAttribute('aria-label') || 'Sign in')]));
+    root.append(el(document, 'p', {}, [icon('wd-accent-life-saver', 'Sign-in help')]));
     root.append(el(document, 'p', {}, [el(document, 'strong', {}, [text(sign.querySelector('strong'))])]));
     const helpP = [...sign.querySelectorAll('p')].find((p) => text(p).startsWith('To access'));
     root.append(el(document, 'p', {}, [text(helpP)]));
@@ -521,9 +523,9 @@ export default {
 
     // 5. search
     const box = document.querySelector('atomic-search-box');
-    root.append(el(document, 'p', {}, [img(document, 'wd-system-search-sparkle.svg', document.querySelector('.cmp-search-v2__toggle').getAttribute('aria-label') || 'Search')]));
+    root.append(el(document, 'p', {}, [icon('wd-system-search-sparkle', document.querySelector('.cmp-search-v2__toggle').getAttribute('aria-label') || 'Search')]));
     root.append(el(document, 'p', {}, [el(document, 'a', { href: box.getAttribute('redirection-url') }, [box.getAttribute('data-placeholder')])]));
-    root.append(el(document, 'p', {}, [img(document, 'wd-system-x.svg', 'Close search')]));
+    root.append(el(document, 'p', {}, [icon('wd-system-x', 'Close search')]));
     const quick = [...document.querySelectorAll('a.quicklink-link')];
     const quickLabel = text(quick[0].closest('div, section').querySelector('span, h2, h3, h4'));
     root.append(el(document, 'p', {}, [el(document, 'strong', {}, [quickLabel || 'Quick Links'])]));

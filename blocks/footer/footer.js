@@ -4,6 +4,8 @@
  * All copy, links and images come from the fragment; this file only builds layout and behavior.
  */
 
+import { resolveFragmentIcons } from '../../scripts/shared.js';
+
 const DESKTOP = window.matchMedia('(width >= 1200px)');
 const ICONS = `${window.hlx?.codeBasePath || ''}/icons`;
 
@@ -31,6 +33,7 @@ async function loadFragment() {
   if (!resp.ok) return null;
   const tpl = document.createElement('template');
   tpl.innerHTML = await resp.text();
+  resolveFragmentIcons(tpl.content);
   return tpl.content;
 }
 
@@ -51,6 +54,7 @@ function isExternal(a, home) {
 
 function buildTop(section) {
   const brandLink = section.querySelector(':scope > p a');
+  const brandLabel = brandLink.querySelector('img')?.alt || brandLink.textContent.trim();
   const logo = el('a', 'footer-brand', [...brandLink.querySelectorAll('img')].map((img) => {
     img.width = 102;
     img.height = 48;
@@ -58,7 +62,7 @@ function buildTop(section) {
     return img;
   }));
   logo.href = brandLink.getAttribute('href');
-  logo.setAttribute('aria-label', brandLink.querySelector('img')?.alt || '');
+  if (brandLabel) logo.setAttribute('aria-label', brandLabel);
 
   const social = el('ul', 'footer-social', [...section.querySelectorAll(':scope > ul > li > a')].map((a) => {
     const link = el('a', 'footer-social-link', [...a.querySelectorAll('img')]);

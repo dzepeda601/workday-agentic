@@ -418,3 +418,40 @@ export function unnestParagraphs(cell) {
   });
   return cell;
 }
+
+/**
+ * Resolve icon shorthand in a fetched fragment into images served from the code bus (/icons).
+ * Handles both published markup (<span class="icon icon-name">) and raw ":name:" tokens
+ * (local .plain.html). The text next to the icon becomes the image's alt text (text is kept).
+ * @param {Element|DocumentFragment} root
+ */
+export function resolveFragmentIcons(root) {
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  const texts = [];
+  while (walker.nextNode()) {
+    if (/:[a-z0-9-]+:/.test(walker.currentNode.textContent)) texts.push(walker.currentNode);
+  }
+  texts.forEach((node) => {
+    const parts = node.textContent.split(/:([a-z0-9-]+):/);
+    const frag = document.createDocumentFragment();
+    parts.forEach((part, i) => {
+      if (i % 2) {
+        const span = document.createElement('span');
+        span.className = `icon icon-${part}`;
+        frag.append(span);
+      } else if (part) {
+        frag.append(part);
+      }
+    });
+    node.replaceWith(frag);
+  });
+  root.querySelectorAll('span.icon').forEach((span) => {
+    const name = [...span.classList].find((c) => c.startsWith('icon-'))?.slice(5);
+    if (!name) return;
+    const img = document.createElement('img');
+    img.src = `${window.hlx?.codeBasePath || ''}/icons/${name}.svg`;
+    img.alt = span.parentElement ? span.parentElement.textContent.trim() : '';
+    img.loading = 'lazy';
+    span.replaceWith(img);
+  });
+}

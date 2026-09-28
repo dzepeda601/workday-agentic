@@ -10,13 +10,13 @@
  *                               (entries without a target on the source stay plain text)
  *   section 3  legal          – list of legal links (privacy icon kept), copyright paragraph
  *
- * Images are downloaded to content/images/footer/ and referenced relatively.
+ * Logo and social icons are SVGs served from the code bus (/icons), referenced with the EDS icon
+ * shorthand ":name:" followed by their label (SVGs cannot be served from content).
  * Legal entries without a URL on the source are consent-manager controls ("Your Privacy Choices",
  * "Cookie Preferences" open a TrustArc modal). The site has no consent manager, so they are
  * omitted (customer decision).
  */
 
-const IMG = 'images/footer/';
 const ORIGIN = 'https://www.workday.com';
 
 const text = (el) => (el ? el.textContent.replace(/\s+/g, ' ').trim() : '');
@@ -40,11 +40,11 @@ export default {
     const hr = () => root.append(el(document, 'hr'));
 
     // 1. brand + social
-    root.append(el(document, 'p', {}, [el(document, 'a', { href: '/' }, [el(document, 'img', { src: `${IMG}workday-logo-reversed.svg`, alt: 'Workday' })])]));
+    root.append(el(document, 'p', {}, [el(document, 'a', { href: '/' }, [':workday-logo-reversed:Workday'])]));
     const social = [...footer.querySelectorAll('.cmp-socialmedia a')].map((a) => {
       const use = a.querySelector('use');
       const file = iconFile(use && (use.getAttribute('href') || use.getAttribute('xlink:href')));
-      return el(document, 'li', {}, [el(document, 'a', { href: a.getAttribute('href') }, [el(document, 'img', { src: `${IMG}${file}`, alt: a.getAttribute('aria-label') || '' })])]);
+      return el(document, 'li', {}, [el(document, 'a', { href: a.getAttribute('href') }, [`:${file.replace(/\.svg$/, '')}:${a.getAttribute('aria-label') || ''}`])]);
     });
     root.append(el(document, 'ul', {}, social));
     hr();
