@@ -1,8 +1,8 @@
 Demo Project - Cloud Adoption
 
 ## Environments
-- Preview: https://main--demo--scdemos.aem.page/
-- Live: https://main--demo--scdemos.aem.live/
+- Preview: https://main--workday-agentic--dzepeda601.aem.page/
+- Live: https://main--workday-agentic--dzepeda601.aem.live/
 
 ## Documentation
 
