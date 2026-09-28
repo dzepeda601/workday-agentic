@@ -1,0 +1,20 @@
+{
+  "variantName": "columns-media",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "spacious",
+    "purpose": "feature-intro",
+    "imagePattern": "video",
+    "structure": "heading + text + CTA + video"
+  },
+  "contentPattern": "1 row x 2 cells: [H2 headline, paragraph, CTA link] | [poster image + video link]",
+  "options": [],
+  "memberVariantIds": ["columns-media"],
+  "usage": {
+    "pagesUsing": ["https://www.workday.com/"],
+    "reuseCount": 1,
+    "lastUsed": "2026-09-28"
+  }
+}

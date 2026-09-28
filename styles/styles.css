@@ -37,24 +37,33 @@
   --space-4xl: 96px;
 
   /* global layout rhythm */
-  --content-padding-inline: var(--space-m);
+  --content-padding-inline: var(--space-xl);
   --main-block-space: var(--space-l);
   --section-block-space: var(--space-l);
 
   /* color scheme */
   color-scheme: light dark;
 
-  /* heritage palette */
-  --color-rust: #a14f2b;
-  --color-gold: #c5a059;
-  --color-parchment: #f5f2ed;
-  --color-ink: #1a1a1a;
+  /* Workday brand palette (extracted from www.workday.com) */
+  --color-wd-navy: #022043;
+  --color-wd-blue: #0057ae;
+  --color-wd-violet: #8579cf;
+  --color-wd-lilac: #c8a2e1;
+  --color-wd-pink: #eec9db;
+  --color-wd-peach: #f9d5c4;
+  --color-wd-orange: #fea838;
+  --color-wd-mist: #b6c1cc;
+  --color-white: #fff;
 
-  /* heritage dark palette */
-  --color-obsidian: #060d0d;
-  --color-card-dark: #162121;
-  --color-rust-bright: #d16a3e;
-  --color-muted: #8b9a9a;
+  /* legacy palette names used by existing blocks – mapped onto the Workday palette */
+  --color-rust: var(--color-wd-blue);
+  --color-gold: var(--color-wd-orange);
+  --color-parchment: var(--color-white);
+  --color-ink: var(--color-wd-navy);
+  --color-obsidian: var(--color-wd-navy);
+  --color-card-dark: #0b2f5a;
+  --color-rust-bright: #3d86d1;
+  --color-muted: #5b6f86;
 
   /* color tokens – grays and palette */
   --color-gray-100: #f1f1f1;
@@ -108,61 +117,75 @@
   /* semantic / named colors */
   --color-light: rgb(255 255 255);
   --color-dark: rgb(0 0 0);
-  --color-text: light-dark(var(--color-ink), var(--color-parchment));
-  --color-link: light-dark(var(--color-ink), var(--color-parchment));
-  --color-link-hover: light-dark(var(--color-rust), var(--color-gold));
-  --color-brand: var(--color-rust);
-  --color-accent: var(--color-gold);
-  --color-shaded: light-dark(var(--color-parchment), var(--color-card-dark));
+  --color-text: light-dark(var(--color-wd-navy), var(--color-white));
+  --color-link: light-dark(var(--color-wd-navy), var(--color-white));
+  --color-link-hover: light-dark(var(--color-wd-blue), var(--color-wd-mist));
+  --color-brand: var(--color-wd-blue);
+  --color-accent: var(--color-wd-orange);
+  --color-shaded: light-dark(#f2f5f8, #0b2f5a);
 
-  /* fonts */
-  --font-family: montserrat, "Trebuchet MS", sans-serif;
-  --font-family-serif: "EB Garamond", georgia, serif;
+  /* fonts – Acid Grotesk is licensed to Workday; Montserrat (bundled) is the delivered fallback */
+  --font-family: "Acid Grotesk", montserrat, arial, helvetica, sans-serif;
+  --font-family-serif: var(--font-family);
   --font-family-mono: "JetBrains Mono", "Courier New", monospace;
   --body-font-family: var(--font-family);
-  --heading-font-family: var(--font-family-serif);
+  --heading-font-family: var(--font-family);
 
-  /* heading sizes */
-  --heading-font-size-xxl: 32.44px;
-  --heading-font-size-xl: 28.83px;
-  --heading-font-size-l: 25.63px;
-  --heading-font-size-m: 22.78px;
-  --heading-font-size-s: 20.25px;
-  --heading-font-size-xs: 18px;
+  /* heading sizes (mobile) – Workday title-1…title-5 */
+  --heading-font-size-xxl: 48px;
+  --heading-font-size-xl: 40px;
+  --heading-font-size-l: 32px;
+  --heading-font-size-m: 20px;
+  --heading-font-size-s: 18px;
+  --heading-font-size-xs: 16px;
   --heading-font-size-xxs: 16px;
   --heading-line-height: 1.15;
 
   /* body sizes */
-  --body-font-size-xxxl: 25px;
+  --body-font-size-xxxl: 24px;
   --body-font-size-xxl: 22px;
   --body-font-size-xl: 20px;
   --body-font-size-l: 18px;
   --body-font-size-m: 16px;
   --body-font-size-s: 14px;
   --body-font-size-xs: 12px;
-  --body-line-height: 1.6;
+  --body-line-height: 1.5;
+
+  /* buttons – Workday pill */
+  --button-height: 48px;
+  --button-radius: 24px;
+  --button-bg: var(--color-wd-navy);
+  --button-fg: var(--color-white);
+  --button-hover-bg: var(--color-wd-blue);
+  --button-hover-fg: var(--color-white);
+
+  /* section backgrounds */
+  --gradient-wd-section: linear-gradient(0deg, var(--color-wd-peach) 0.01%, var(--color-wd-pink) 10%,
+      var(--color-wd-lilac) 25%, var(--color-wd-violet) 40%, var(--color-wd-blue) 70%, var(--color-wd-navy) 95%);
+  --gradient-wd-headline: linear-gradient(0deg, #fea838 0%, #ffca5b 20%, #ffd061 30%, #ffc974 40%,
+      #ffbe8c 50%, #ffaaad 65%, #ff9c9d 75%, #fe7b50 95%);
 
   /* nav / layout */
   --nav-height: 64px;
   --header-height: var(--nav-height);
 
   /* boilerplate compatibility – map to design tokens */
-  --background-color: light-dark(var(--color-parchment), var(--color-obsidian));
+  --background-color: light-dark(var(--color-white), var(--color-wd-navy));
   --light-color: var(--color-shaded);
   --dark-color: var(--color-gray-500);
   --text-color: var(--color-text);
   --link-color: var(--color-link);
   --link-hover-color: var(--color-link-hover);
 
-  /* heritage border */
-  --border-heritage: 2px solid light-dark(rgb(161 79 43 / 20%), rgb(245 242 237 / 20%));
+  /* legacy border tokens */
+  --border-heritage: 1px solid light-dark(rgb(2 32 67 / 16%), rgb(255 255 255 / 24%));
   --border-radius-heritage: 24px;
 
   /* gradient and glow tokens */
-  --gradient-brand: linear-gradient(135deg, var(--color-rust) 0%, var(--color-gold) 100%);
-  --gradient-brand-dark: linear-gradient(135deg, var(--color-rust-bright) 0%, var(--color-gold) 100%);
-  --shadow-glow-rust: 0 0 40px rgb(161 79 43 / 30%);
-  --shadow-glow-gold: 0 0 40px rgb(197 160 89 / 25%);
+  --gradient-brand: linear-gradient(135deg, var(--color-wd-blue) 0%, var(--color-wd-violet) 100%);
+  --gradient-brand-dark: var(--gradient-brand);
+  --shadow-glow-rust: 0 0 40px rgb(0 87 174 / 30%);
+  --shadow-glow-gold: 0 0 40px rgb(254 168 56 / 25%);
   --shadow-lift-m: 0 20px 40px -8px rgb(0 0 0 / 15%);
   --shadow-lift-l: 0 30px 60px -12px rgb(0 0 0 / 22%);
   --shadow-card: 0 2px 8px rgb(0 0 0 / 5%), 0 1px 2px rgb(0 0 0 / 7%);
@@ -186,27 +209,20 @@
 @media (width >= 600px) {
   :root,
   :host {
-    --heading-font-size-xxl: 44px;
-    --heading-font-size-xl: 36px;
-    --content-padding-inline: var(--space-l);
     --main-block-space: var(--space-xl);
-    --section-block-space: var(--space-xl);
+    --section-block-space: var(--space-2xl);
   }
 }
 
 @media (width >= 900px) {
   :root,
   :host {
-    --body-font-size-m: 18px;
-    --body-font-size-s: 16px;
-    --body-font-size-xs: 14px;
-    --heading-font-size-xxl: 64px;
+    --heading-font-size-xxl: 56px;
     --heading-font-size-xl: 48px;
-    --heading-font-size-l: 32px;
+    --heading-font-size-l: 40px;
     --heading-font-size-m: 24px;
     --heading-font-size-s: 20px;
     --heading-font-size-xs: 18px;
-    --content-padding-inline: var(--space-xl);
     --section-block-space: var(--space-3xl);
   }
 }
@@ -214,7 +230,7 @@
 @media (width >= 1200px) {
   :root,
   :host {
-    --grid-container-width: 1200px;
+    --grid-container-width: 1376px;
   }
 }
 
@@ -262,7 +278,7 @@ html {
 }
 
 ::selection {
-  background: light-dark(rgb(161 79 43 / 20%), rgb(197 160 89 / 30%));
+  background: light-dark(rgb(0 87 174 / 20%), rgb(182 193 204 / 35%));
   color: inherit;
 }
 
@@ -271,11 +287,6 @@ body {
   margin: 0;
   box-sizing: border-box;
   background-color: var(--background-color);
-  background-image:
-    radial-gradient(ellipse 80% 50% at 12% 8%,
-      light-dark(rgb(197 160 89 / 9%), rgb(197 160 89 / 4%)) 0%, transparent 60%),
-    radial-gradient(ellipse 55% 40% at 88% 82%,
-      light-dark(rgb(161 79 43 / 6%), rgb(161 79 43 / 3%)) 0%, transparent 50%);
   color: var(--text-color);
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
@@ -306,42 +317,60 @@ footer .footer[data-block-status="loaded"] {
   visibility: visible;
 }
 
-/* typography */
+/* typography – Workday title scale (weight 800 headlines) */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  margin-top: 0.8em;
-  margin-bottom: 0.4em;
+  margin-top: 0;
+  margin-bottom: var(--space-l);
   font-family: var(--heading-font-family);
-  font-weight: 500;
+  font-weight: 800;
   line-height: var(--heading-line-height);
   scroll-margin: 40px;
 }
 
 h1 {
   font-size: var(--heading-font-size-xxl);
-  letter-spacing: -0.02em;
+  line-height: 1.1667;
 }
 
 h2 {
-  font-size: var(--heading-font-size-xl);
-  letter-spacing: -0.015em;
+  font-size: var(--heading-font-size-l);
+  line-height: 1.25;
 }
 
-h3 { font-size: var(--heading-font-size-m); }
-h4 { font-size: var(--heading-font-size-s); }
+h3 {
+  font-size: var(--heading-font-size-m);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+h4 {
+  font-size: var(--heading-font-size-s);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+h5,
+h6 {
+  font-weight: 700;
+}
+
 h5 { font-size: var(--heading-font-size-xs); }
 h6 { font-size: var(--heading-font-size-xxs); }
 
-@media (width >= 600px) {
-  h3 { font-size: var(--heading-font-size-l); }
-  h4 { font-size: var(--heading-font-size-m); }
-  h5 { font-size: var(--heading-font-size-s); }
-}
+@media (width >= 900px) {
+  h1 {
+    line-height: 1.1429;
+    letter-spacing: -0.02em;
+  }
 
+  h2 { line-height: 1.2; }
+  h3 { line-height: 1.3333; }
+}
 
 p,
 dl,
@@ -349,8 +378,8 @@ ol,
 ul,
 pre,
 blockquote {
-  margin-top: 0.8em;
-  margin-bottom: 0.25em;
+  margin-top: 0;
+  margin-bottom: var(--space-m);
 }
 
 main ul,
@@ -373,9 +402,9 @@ pre {
 
 :not(pre) > code {
   padding: 0.1em 0.35em;
-  background: rgb(161 79 43 / 10%);
+  background: rgb(0 87 174 / 10%);
   border-radius: 4px;
-  color: var(--color-rust);
+  color: var(--color-wd-blue);
 }
 
 pre {
@@ -387,28 +416,31 @@ pre {
 }
 
 strong {
-  font-weight: 600;
+  font-weight: 700;
 }
 
 /* links */
 a:any-link {
   color: var(--link-color);
   text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.2em;
-  text-decoration-color: light-dark(rgb(26 26 26 / 30%), rgb(245 242 237 / 30%));
+  text-underline-offset: 0.15em;
   overflow-wrap: break-word;
+  transition: color 0.15s;
 }
 
 a:hover {
   color: var(--link-hover-color);
-  text-decoration: underline;
-  text-decoration-color: var(--link-hover-color);
 }
 
-/* buttons (AEM default content: links in standalone paragraphs) */
+a:any-link:focus-visible {
+  outline: 2px solid currentcolor;
+  outline-offset: 2px;
+}
+
+/* buttons – Workday pill (links alone in a paragraph).
+   default / primary (bold link) = solid; secondary (italic link) = outline */
 p.button-container {
-  margin: var(--space-m) 0;
+  margin: var(--space-l) 0 0;
 }
 
 a.button:any-link,
@@ -417,39 +449,24 @@ button.button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-xs);
+  gap: var(--space-s);
   max-width: 100%;
+  min-height: var(--button-height);
   margin: 0;
-  border: 1px solid light-dark(var(--color-rust), var(--color-rust-bright));
-  border-radius: 4px;
-  padding: 20px 50px;
+  border: 0;
+  border-radius: var(--button-radius);
+  padding: 0 20px;
   font: inherit;
+  font-size: var(--body-font-size-m);
   font-weight: 700;
-  font-size: 0.85rem;
-  line-height: 1.2;
+  font-style: normal;
+  line-height: 24px;
   text-align: center;
   text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  background-color: light-dark(var(--color-rust), var(--color-rust-bright));
-  background-image: linear-gradient(135deg, rgb(255 255 255 / 12%), rgb(0 0 0 / 8%));
-  color: var(--color-light);
+  background-color: var(--button-bg);
+  color: var(--button-fg);
   cursor: pointer;
-  overflow: hidden;
-  position: relative;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  transition: all 0.4s;
-}
-
-a.button:any-link::after,
-button.button::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(105deg, transparent 30%, rgb(255 255 255 / 22%) 50%, transparent 70%);
-  transform: translateX(-120%);
-  transition: transform 0.55s ease;
+  transition: background-color 0.15s, color 0.15s, box-shadow 0.15s;
 }
 
 input,
@@ -459,45 +476,18 @@ button {
   font: inherit;
 }
 
-/* Primary variant */
-a.button.primary:any-link,
-button.button.primary {
-  border-color: var(--color-rust);
-  background-color: var(--color-rust);
-  color: var(--color-light);
-}
-
 a.button:any-link:hover,
 a.button:any-link:focus-visible,
 button.button:hover,
 button.button:focus-visible {
-  background-color: var(--color-gold);
-  border-color: var(--color-gold);
-  transform: translateY(-3px);
-  box-shadow: 0 14px 30px light-dark(rgb(161 79 43 / 30%), rgb(209 106 62 / 35%)), 0 0 0 1px var(--color-gold);
-  cursor: pointer;
+  background-color: var(--button-hover-bg);
+  color: var(--button-hover-fg);
   text-decoration: none;
-}
-
-a.button:any-link:hover::after,
-a.button:any-link:focus-visible::after,
-button.button:hover::after,
-button.button:focus-visible::after {
-  transform: translateX(120%);
-}
-
-a.button.primary:hover,
-a.button.primary:focus-visible,
-button.button.primary:hover,
-button.button.primary:focus-visible {
-  border-color: var(--color-gold);
-  background-color: var(--color-gold);
-  color: var(--color-light);
 }
 
 a.button:any-link:focus-visible,
 button.button:focus-visible {
-  outline: 2px solid var(--link-color);
+  outline: 2px solid var(--button-bg);
   outline-offset: 2px;
 }
 
@@ -508,28 +498,24 @@ button.button:disabled,
 button.button:disabled:hover,
 button.button:disabled:focus-visible {
   background-color: var(--light-color);
-  border-color: var(--light-color);
   color: var(--dark-color);
   cursor: not-allowed;
   pointer-events: none;
 }
 
-a.button.secondary,
+a.button.secondary:any-link,
 button.button.secondary {
-  border: 1.5px solid var(--color-rust);
   background-color: transparent;
-  color: var(--color-rust);
+  box-shadow: inset 0 0 0 2px var(--button-bg);
+  color: var(--button-bg);
 }
 
-a.button.secondary:hover,
-a.button.secondary:focus-visible,
+a.button.secondary:any-link:hover,
+a.button.secondary:any-link:focus-visible,
 button.button.secondary:hover,
 button.button.secondary:focus-visible {
-  border-color: var(--color-gold);
-  background-color: light-dark(rgb(197 160 89 / 8%), rgb(197 160 89 / 12%));
-  color: var(--color-gold);
-  transform: translateY(-3px);
-  box-shadow: 0 14px 30px light-dark(rgb(197 160 89 / 18%), rgb(197 160 89 / 22%));
+  background-color: var(--button-bg);
+  color: var(--button-fg);
 }
 
 /* main content area – use design tokens for rhythm */
@@ -634,99 +620,88 @@ main .section.highlight {
 .spacer-bottom-m { margin-bottom: var(--space-m); }
 .spacer-bottom-l { margin-bottom: var(--space-l); }
 
-/* section-metadata style=rust: bold brand accent section */
-main > .section.rust {
-  background-color: var(--color-rust);
-  color: var(--color-parchment);
+/* Workday dark sections (style=dark, plus legacy ink/rust names): navy, white text, white pill buttons */
+:is(main, article.article-body) > .section:is(.dark, .ink, .rust),
+:is(main, article.article-body) > .section:is(.gradient-dark-to-pink, .gradient) {
+  --text-color: var(--color-white);
+  --link-color: var(--color-white);
+  --link-hover-color: var(--color-wd-mist);
+  --button-bg: var(--color-white);
+  --button-fg: var(--color-wd-navy);
+  --button-hover-bg: var(--color-wd-mist);
+  --button-hover-fg: var(--color-wd-navy);
+
   margin: 0;
-  padding: var(--space-3xl, var(--section-block-space)) 0;
+  padding: var(--section-block-space) 0;
+  color: var(--text-color);
 }
 
-main > .section.rust * {
-  color: var(--color-parchment);
+:is(main, article.article-body) > .section:is(.dark, .ink, .rust) {
+  background-color: var(--color-wd-navy);
 }
 
-main > .section.rust a:any-link {
-  color: var(--color-parchment);
-  text-decoration-color: rgb(245 242 237 / 40%);
+/* style=gradient-dark-to-pink: navy at the top fading through blue and violet to peach */
+:is(main, article.article-body) > .section:is(.gradient-dark-to-pink, .gradient) {
+  background: var(--gradient-wd-section);
 }
 
-/* section-metadata style=gradient: warm brand gradient full-bleed section */
-:is(main, article.article-body) > .section.gradient {
-  background: var(--gradient-brand);
-  color: var(--color-parchment);
-  margin: 0;
-  padding: var(--space-3xl, var(--section-block-space)) 0;
+/* white outline pill on navy sections – hover fills white */
+:is(main, article.article-body) > .section:is(.dark, .ink, .rust, .gradient-dark-to-pink, .gradient)
+  a.button.secondary:any-link:hover {
+  background-color: var(--color-white);
+  color: var(--color-wd-navy);
 }
 
-:is(main, article.article-body) > .section.gradient * {
-  color: var(--color-parchment);
+/* centered headline copy in gradient sections and in text-only dark sections (closing CTA) */
+main > .section.gradient-dark-to-pink > .default-content-wrapper,
+main > .section.dark:not(:has(.block)) > .default-content-wrapper {
+  text-align: center;
 }
 
-:is(main, article.article-body) > .section.gradient a:any-link {
-  color: var(--color-parchment);
-  text-decoration-color: rgb(255 255 255 / 40%);
+/* gradient section intro copy uses Workday body-1 (20/28); CTA sits 16px below it */
+main > .section.gradient-dark-to-pink > .default-content-wrapper p {
+  font-size: var(--body-font-size-xl);
+  line-height: 28px;
 }
 
-/* Shared button overrides for colored sections (rust, gradient) */
-:is(main, article.article-body) > .section.rust a.button:any-link,
-:is(main, article.article-body) > .section.rust button.button,
-:is(main, article.article-body) > .section.gradient a.button:any-link,
-:is(main, article.article-body) > .section.gradient button.button {
-  border-color: var(--color-parchment);
-  background-color: transparent;
-  background-image: none;
-  color: var(--color-parchment);
-  box-shadow: none;
+main > .section.gradient-dark-to-pink > .default-content-wrapper p.button-container {
+  margin-top: var(--space-m);
 }
 
-:is(main, article.article-body) > .section.rust a.button:any-link:hover,
-:is(main, article.article-body) > .section.rust button.button:hover,
-:is(main, article.article-body) > .section.gradient a.button:any-link:hover,
-:is(main, article.article-body) > .section.gradient button.button:hover {
-  background-color: var(--color-parchment);
-  border-color: var(--color-parchment);
-  color: var(--color-rust);
-  box-shadow: 0 8px 24px rgb(0 0 0 / 20%);
+/* persona section continues straight on from the hero: no top padding, wider gap above the cards */
+main > .section.gradient-dark-to-pink.accordion-persona-container {
+  padding-top: 0;
 }
 
-/* section-metadata style=ink: deep dark full-bleed section */
-:is(main, article.article-body) > .section.ink {
-  background-color: var(--color-ink);
-  color: var(--color-parchment);
-  margin: 0;
-  padding: var(--space-3xl, var(--section-block-space)) 0;
+main > .section.gradient-dark-to-pink.accordion-persona-container > .default-content-wrapper {
+  margin-bottom: calc(var(--space-2xl) + var(--space-s));
 }
 
-:is(main, article.article-body) > .section.ink * {
-  color: var(--color-parchment);
+/* customer stories: tighter bottom edge under the carousel progress bar */
+main > .section.gradient-dark-to-pink.carousel-stories-container {
+  padding-bottom: var(--space-xl);
 }
 
-/* section-metadata style=warm: atmospheric warm tint with heritage diamond mesh */
+/* closing CTA: Workday title-1 headline with the warm-to-teal gradient */
+main > .section.dark:not(:has(.block)) h2 {
+  font-size: var(--heading-font-size-xxl);
+  line-height: 1.1429;
+  letter-spacing: -0.02em;
+  background-image: linear-gradient(0deg, #fec35d 0.1%, #fecb68 5.09%, #fde695 30.04%,
+      #eeeeb7 50%, #cae5ce 74.95%, #84cfd2 99.9%);
+  background-clip: text;
+  color: transparent;
+}
+
 main > .section.warm {
-  background-color: light-dark(#f2ead8, #0e1812);
-  background-image:
-    repeating-linear-gradient(
-      45deg,
-      light-dark(rgb(161 79 43 / 4%), rgb(245 242 237 / 2%)) 0,
-      light-dark(rgb(161 79 43 / 4%), rgb(245 242 237 / 2%)) 1px,
-      transparent 1px,
-      transparent 12px
-    ),
-    repeating-linear-gradient(
-      -45deg,
-      light-dark(rgb(161 79 43 / 4%), rgb(245 242 237 / 2%)) 0,
-      light-dark(rgb(161 79 43 / 4%), rgb(245 242 237 / 2%)) 1px,
-      transparent 1px,
-      transparent 12px
-    );
+  background-color: var(--light-color);
   margin: 0;
-  padding: var(--space-3xl, var(--section-block-space)) 0;
+  padding: var(--section-block-space) 0;
 }
 
 /* gradient-text utility: apply to any heading or span for brand gradient text */
 .gradient-text {
-  background: var(--gradient-brand);
+  background: var(--gradient-wd-headline);
   background-clip: text;
   color: transparent;
 }

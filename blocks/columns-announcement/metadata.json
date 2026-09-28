@@ -1,0 +1,20 @@
+{
+  "variantName": "columns-announcement",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "minimal",
+    "purpose": "announcement-bar",
+    "imagePattern": "logo",
+    "structure": "logo + text + inline link"
+  },
+  "contentPattern": "1 row x 2 cells: [logo image] | [paragraph with inline link]",
+  "options": [],
+  "memberVariantIds": ["columns-announcement"],
+  "usage": {
+    "pagesUsing": ["https://www.workday.com/"],
+    "reuseCount": 1,
+    "lastUsed": "2026-09-28"
+  }
+}

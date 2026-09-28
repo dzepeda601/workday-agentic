@@ -1,0 +1,92 @@
+/* Workday Rising announcement band: full-bleed dark-blue bar, logo + one line of copy + inline link.
+   Values extracted from www.workday.com .announcement-bar-v2 computed styles. */
+
+/* full-bleed: drop the section's bottom padding and the wrapper's content-width box */
+main > .section.columns-announcement-container {
+  padding: 0;
+}
+
+main > .section > .columns-announcement-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+.columns-announcement {
+  --text-color: var(--color-white);
+  --link-color: var(--color-white);
+  --link-hover-color: var(--color-white);
+
+  padding: 0 var(--space-l);
+  background-color: #0f2e66;
+  color: var(--text-color);
+  text-align: center;
+}
+
+.columns-announcement .columns-announcement-inner {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.columns-announcement .columns-announcement-logo {
+  display: none;
+}
+
+.columns-announcement .columns-announcement-logo img {
+  display: block;
+  width: auto;
+  height: 96px;
+  aspect-ratio: auto;
+  object-fit: fill;
+}
+
+.columns-announcement .columns-announcement-text {
+  padding-left: 2px;
+  text-align: left;
+}
+
+.columns-announcement .columns-announcement-text p {
+  margin: 0;
+  padding: 12px 0;
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+}
+
+/* source: border 0, radius 24px; focus ring is a 2px white ring drawn outside the box
+   (outline instead of a border so the link width stays 109px-equivalent and no layout shift) */
+.columns-announcement .columns-announcement-text a:any-link {
+  margin: 0 -4px;
+  border: 0;
+  border-radius: 24px;
+  padding: 0 4px;
+  color: var(--link-color);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.columns-announcement .columns-announcement-text a:any-link:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 0;
+}
+
+@media (width >= 900px) {
+  .columns-announcement .columns-announcement-logo {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    margin: 0 16px 0 10px;
+  }
+
+  .columns-announcement .columns-announcement-text {
+    margin-right: 32px;
+    padding-left: 0;
+  }
+}
+
+@media (width >= 1200px) {
+  .columns-announcement {
+    padding: 0 var(--space-xl);
+  }
+}

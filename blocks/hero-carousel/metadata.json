@@ -1,0 +1,20 @@
+{
+  "variantName": "hero-carousel",
+  "baseBlock": "hero",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "spacious",
+    "purpose": "homepage-hero",
+    "imagePattern": "video-slides",
+    "structure": "heading + text + CTA + media slides"
+  },
+  "contentPattern": "Row 1 (1 cell): H1, paragraph, CTA link. Rows 2..5 (2 cells each): [slide media: poster image + video link] | [optional logo image, caption paragraph, link]",
+  "options": [],
+  "memberVariantIds": ["hero-carousel"],
+  "usage": {
+    "pagesUsing": ["https://www.workday.com/"],
+    "reuseCount": 1,
+    "lastUsed": "2026-09-28"
+  }
+}

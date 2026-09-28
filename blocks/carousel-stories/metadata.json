@@ -1,0 +1,20 @@
+{
+  "variantName": "carousel-stories",
+  "baseBlock": "carousel",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light-cards-on-gradient",
+    "density": "medium",
+    "purpose": "customer-stories",
+    "imagePattern": "logo-panel",
+    "structure": "logo + text + link"
+  },
+  "contentPattern": "7 rows x 2 cells: [company logo image] | [result paragraph, 'Read Story' link]",
+  "options": [],
+  "memberVariantIds": ["carousel-stories"],
+  "usage": {
+    "pagesUsing": ["https://www.workday.com/"],
+    "reuseCount": 1,
+    "lastUsed": "2026-09-28"
+  }
+}

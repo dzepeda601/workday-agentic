@@ -359,3 +359,62 @@ export function getBlockContext(block) {
     isEmbed,
   };
 }
+
+let placeholdersPromise;
+
+/**
+ * Fetch author-managed placeholder strings from /placeholders.json.
+ * Keys are camelCased (e.g. "Next Slide" -> nextSlide). Resolves to {} on failure.
+ * @returns {Promise<Record<string, string>>}
+ */
+export function fetchPlaceholders() {
+  if (!placeholdersPromise) {
+    placeholdersPromise = fetch('/placeholders.json')
+      .then((resp) => (resp.ok ? resp.json() : { data: [] }))
+      .then((json) => (json.data || []).reduce((acc, { Key, Text }) => {
+        if (Key) {
+          const camel = Key.toLowerCase().replace(/[^a-z0-9]+(.)/g, (m, c) => c.toUpperCase());
+          acc[camel] = Text;
+        }
+        return acc;
+      }, {}))
+      .catch(() => ({}));
+  }
+  return placeholdersPromise;
+}
+
+const FLOW_TAGS = ['P', 'UL', 'OL', 'PRE', 'TABLE', 'BLOCKQUOTE', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6'];
+
+/**
+ * Restore authored paragraphs that aem.js wrapTextNodes() nested inside one <p>.
+ * When a block cell starts with a bare <picture> (e.g. an unwrapped Dynamic Media image)
+ * followed by more content, wrapTextNodes wraps the whole cell in a single <p>, producing
+ * <p><picture><p>…</p><ul>…</ul></p>. This lifts the nested flow elements back out and
+ * re-wraps the loose inline runs (picture, text, links) in their own <p>.
+ * @param {Element} cell block cell (or any container) whose direct <p> children to fix
+ * @returns {Element} the same cell
+ */
+export function unnestParagraphs(cell) {
+  cell.querySelectorAll(':scope > p').forEach((p) => {
+    const nodes = [...p.childNodes];
+    if (!nodes.some((n) => FLOW_TAGS.includes(n.tagName))) return;
+    const out = [];
+    let run = null;
+    nodes.forEach((node) => {
+      if (FLOW_TAGS.includes(node.tagName)) {
+        run = null;
+        out.push(node);
+      } else if (run) {
+        run.append(node);
+      } else if (node.nodeType === Node.TEXT_NODE && !node.textContent.trim()) {
+        out.push(node);
+      } else {
+        run = document.createElement('p');
+        run.append(node);
+        out.push(run);
+      }
+    });
+    p.replaceWith(...out);
+  });
+  return cell;
+}

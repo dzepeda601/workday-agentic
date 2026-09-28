@@ -1,0 +1,20 @@
+{
+  "variantName": "accordion-persona",
+  "baseBlock": "accordion",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark-on-gradient",
+    "density": "medium",
+    "purpose": "persona-explorer",
+    "imagePattern": "background-photo",
+    "structure": "title + bg image + text + links + promo"
+  },
+  "contentPattern": "5 rows x 2 cells: [title: HR] | [background image, description paragraph, list of 4 links, promo: logo image + sentence + link]",
+  "options": [],
+  "memberVariantIds": ["accordion-persona"],
+  "usage": {
+    "pagesUsing": ["https://www.workday.com/"],
+    "reuseCount": 1,
+    "lastUsed": "2026-09-28"
+  }
+}

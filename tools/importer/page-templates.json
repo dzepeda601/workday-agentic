@@ -1,0 +1,132 @@
+{
+  "metadata": {
+    "projectType": "da"
+  },
+  "templates": [
+    {
+      "name": "home",
+      "urls": [
+        "https://www.workday.com/"
+      ],
+      "representativeUrl": "https://www.workday.com/",
+      "description": "Workday homepage: announcement bar, split hero with rotating media, persona accordion, AI agents feature, customer stories carousel, closing CTA",
+      "urlPattern": "/",
+      "blocks": [
+        {
+          "name": "columns-announcement",
+          "instances": [
+            ".announcement-carousel-v2 .announcement-bar-v2__wrapper-container"
+          ]
+        },
+        {
+          "name": "hero-carousel",
+          "instances": [
+            "main > .aem-Grid > .section-v3:has(.slider) > .cmp-section-v3 > .aem-Grid > .columncontrol"
+          ]
+        },
+        {
+          "name": "accordion-persona",
+          "instances": [
+            ".persona"
+          ]
+        },
+        {
+          "name": "columns-media",
+          "instances": [
+            "main > .aem-Grid > .section-v3:has(.lottie) > .cmp-section-v3 > .aem-Grid > .columncontrol"
+          ]
+        },
+        {
+          "name": "carousel-stories",
+          "instances": [
+            ".newCarousel"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "rc5",
+          "name": "announcement-bar",
+          "selector": [
+            "main > .aem-Grid > .announcement-carousel-v2"
+          ],
+          "style": null,
+          "blocks": [
+            "columns-announcement"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "rc6",
+          "name": "hero",
+          "selector": [
+            "main > .aem-Grid > .section-v3:has(.slider)",
+            "main > .aem-Grid > .section-v3:nth-child(2)"
+          ],
+          "style": "dark",
+          "blocks": [
+            "hero-carousel"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "rc7",
+          "name": "persona-explorer",
+          "selector": [
+            "main > .aem-Grid > .section-v3:has(.persona)",
+            "main > .aem-Grid > .section-v3:nth-child(3)"
+          ],
+          "style": "gradient-dark-to-pink",
+          "blocks": [
+            "accordion-persona"
+          ],
+          "defaultContent": [
+            ".section-v3:has(.persona) .cmp-text"
+          ]
+        },
+        {
+          "id": "rc8",
+          "name": "ai-agents",
+          "selector": [
+            "main > .aem-Grid > .section-v3:has(.lottie)",
+            "main > .aem-Grid > .section-v3:nth-child(4)"
+          ],
+          "style": "dark",
+          "blocks": [
+            "columns-media"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "rc9",
+          "name": "customer-stories",
+          "selector": [
+            "main > .aem-Grid > .section-v3:has(.newCarousel)",
+            "main > .aem-Grid > .section-v3:nth-child(5)"
+          ],
+          "style": "gradient-dark-to-pink",
+          "blocks": [
+            "carousel-stories"
+          ],
+          "defaultContent": [
+            ".section-v3:has(.newCarousel) .cmp-text",
+            ".section-v3:has(.newCarousel) .button.align-center"
+          ]
+        },
+        {
+          "id": "rc10",
+          "name": "closing-cta",
+          "selector": [
+            "main > .aem-Grid > .section-v3:has(.cta-block)",
+            "main > .aem-Grid > .section-v3:last-child"
+          ],
+          "style": "dark",
+          "blocks": [],
+          "defaultContent": [
+            ".cta-block"
+          ]
+        }
+      ]
+    }
+  ]
+}

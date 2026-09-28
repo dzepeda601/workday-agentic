@@ -1,0 +1,113 @@
+/* columns-media: [headline, copy, CTA] | [video poster]
+   values from www.workday.com computed styles (title-2, body-1, wd-btn outline, lottie video-player) */
+
+.columns-media .columns-media-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+/* title-2 headline: 40/48 mobile, 48/56 desktop, weight 800, orange-pink gradient text */
+.columns-media .columns-media-text h2 {
+  margin-bottom: var(--space-l);
+  font-size: var(--heading-font-size-xl);
+  font-weight: 800;
+  line-height: 1.2;
+  background-image: var(--gradient-wd-headline);
+  background-clip: text;
+  color: transparent;
+}
+
+/* drop the global h2 accent bar (not present on the source headline) */
+main .section .columns-media.block .columns-media-text h2::after {
+  content: none;
+}
+
+/* body-1 copy: 20/28 */
+.columns-media .columns-media-text p {
+  font-size: var(--body-font-size-xl);
+  line-height: 1.4;
+}
+
+.columns-media .columns-media-text p.button-container {
+  font-size: var(--body-font-size-m);
+  line-height: var(--body-line-height);
+}
+
+/* authored as italic link (secondary button marker); source label is upright */
+.columns-media .columns-media-text p.button-container em {
+  font-style: normal;
+}
+
+.columns-media .columns-media-text > *:last-child {
+  margin-bottom: 0;
+}
+
+/* media: fixed-height navy stage, poster covers it */
+.columns-media .columns-media-media {
+  position: relative;
+  height: 245px;
+  overflow: hidden;
+  background-color: var(--color-wd-navy);
+}
+
+.columns-media .columns-media-media p {
+  margin: 0;
+}
+
+.columns-media .columns-media-media picture {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.columns-media .columns-media-media img,
+.columns-media .columns-media-media video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: cover;
+}
+
+/* video link: whole media area is the click target; source shows no visible play label */
+.columns-media .columns-media-media a.columns-media-play:any-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  color: transparent;
+  text-decoration: none;
+}
+
+.columns-media .columns-media-media a.columns-media-play:any-link:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: -2px;
+}
+
+@media (width >= 900px) {
+  .columns-media .columns-media-row {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .columns-media .columns-media-text h2 {
+    line-height: 1.1667;
+  }
+
+  /* 4 of 12 columns with a 32px gutter */
+  .columns-media .columns-media-text {
+    flex: 0 0 calc((100% + var(--space-xl)) / 3 - var(--space-xl));
+    min-width: 0;
+  }
+
+  .columns-media .columns-media-text p.button-container {
+    margin-top: var(--space-xl);
+  }
+
+  .columns-media .columns-media-media {
+    flex: 1 1 0;
+    min-width: 0;
+    height: 680px;
+  }
+}

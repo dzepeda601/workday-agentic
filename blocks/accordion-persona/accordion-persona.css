@@ -1,0 +1,290 @@
+/* Persona accordion: stacked cards on mobile/tablet, expanding card row on wide screens */
+.accordion-persona {
+  --accordion-persona-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --accordion-persona-toggle-size: 32px;
+  --accordion-persona-toggle-bar: 14px;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s, 8px);
+  color: var(--color-white);
+}
+
+.accordion-persona .accordion-persona-item {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--color-wd-mist);
+  border-radius: 8px;
+  background-color: var(--color-wd-navy);
+  opacity: 0.9;
+  transition: flex-grow 0.5s var(--accordion-persona-ease), opacity 0.5s var(--accordion-persona-ease);
+}
+
+.accordion-persona .accordion-persona-item[open] {
+  background-color: rgb(0 0 0 / 40%);
+  opacity: 1;
+}
+
+/* title row */
+.accordion-persona .accordion-persona-item-label {
+  position: relative;
+  z-index: 1;
+  padding: var(--space-m, 16px);
+  padding-inline-end: calc(var(--space-m, 16px) * 2 + var(--accordion-persona-toggle-size));
+  list-style: none;
+  cursor: pointer;
+}
+
+.accordion-persona .accordion-persona-item-label::-webkit-details-marker {
+  display: none;
+}
+
+.accordion-persona .accordion-persona-item-label > * {
+  margin: 0;
+  color: var(--color-white);
+  font-size: var(--heading-font-size-m, 20px);
+  font-weight: 700;
+  line-height: 28px;
+}
+
+/* plus / minus toggle */
+.accordion-persona .accordion-persona-item-label::after {
+  content: '';
+  position: absolute;
+  top: var(--space-m, 16px);
+  right: var(--space-m, 16px);
+  width: var(--accordion-persona-toggle-size);
+  height: var(--accordion-persona-toggle-size);
+  border-radius: 50%;
+  background:
+    linear-gradient(var(--color-white), var(--color-white)) center / var(--accordion-persona-toggle-bar) 2px no-repeat,
+    linear-gradient(var(--color-white), var(--color-white)) center / 2px var(--accordion-persona-toggle-bar) no-repeat,
+    rgb(255 255 255 / 40%);
+  backdrop-filter: blur(12px);
+}
+
+.accordion-persona .accordion-persona-item[open] .accordion-persona-item-label::after {
+  background:
+    linear-gradient(var(--color-white), var(--color-white)) center / var(--accordion-persona-toggle-bar) 2px no-repeat,
+    rgb(255 255 255 / 40%);
+}
+
+/* panel body */
+.accordion-persona .accordion-persona-item-body {
+  display: flex;
+  flex-direction: column;
+  padding: 0 var(--space-m, 16px) var(--space-m, 16px);
+}
+
+/* background photo fills the whole card, behind title and content */
+.accordion-persona .accordion-persona-item-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.accordion-persona .accordion-persona-item-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgb(0 0 0 / 80%) 0%, rgb(0 0 0 / 40%) 100%);
+  transition: background-image 0.5s var(--accordion-persona-ease);
+}
+
+.accordion-persona .accordion-persona-item-bg picture,
+.accordion-persona .accordion-persona-item-bg img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 0;
+}
+
+.accordion-persona .accordion-persona-item-content,
+.accordion-persona .accordion-persona-item-promo {
+  position: relative;
+  z-index: 2;
+}
+
+.accordion-persona .accordion-persona-item-content > p {
+  max-width: 262px;
+  margin: 0 0 var(--space-m, 16px);
+  font-size: var(--body-font-size-m, 16px);
+  line-height: 24px;
+}
+
+/* bold white arrow links */
+.accordion-persona .accordion-persona-item-links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.accordion-persona .accordion-persona-item-links li {
+  margin: 0 0 var(--space-m, 16px);
+}
+
+.accordion-persona .accordion-persona-item-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-s, 8px);
+  color: var(--color-white);
+  font-size: var(--body-font-size-m, 16px);
+  font-weight: 700;
+  line-height: 24px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.accordion-persona .accordion-persona-item-links a::after {
+  content: '';
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  background-color: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M10.52 5.26a.5.5 0 0 1 0-.71l.7-.7a.5.5 0 0 1 .71 0l7.78 7.77a.5.5 0 0 1 0 .71l-7.78 7.78a.5.5 0 0 1-.71 0l-.7-.7a.5.5 0 0 1 0-.71L16.23 13H4.6a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h11.63z'/%3E%3C/svg%3E") center / contain no-repeat;
+  transition: transform 0.3s;
+}
+
+.accordion-persona .accordion-persona-item-links a:hover::after {
+  transform: translateX(4px);
+}
+
+/* promo callout with gradient border */
+.accordion-persona .accordion-persona-item-promo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m, 16px);
+  padding: 18px;
+  border-radius: 8px;
+  background-color: rgb(255 255 255 / 20%);
+  backdrop-filter: blur(10px);
+}
+
+.accordion-persona .accordion-persona-item-promo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  padding: 1px;
+  border-radius: inherit;
+  background-image: linear-gradient(0deg, #ffc765 0%, #ffbb83 16.67%, #ffa4ab 33.33%, #ff949a 50%, #ff7144 66.67%, #ff6417 100%);
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+
+.accordion-persona .accordion-persona-item-promo p {
+  margin: 0;
+  color: var(--color-white);
+  font-size: var(--body-font-size-s, 14px);
+  line-height: 1.4;
+}
+
+.accordion-persona .accordion-persona-item-promo picture {
+  display: flex;
+  align-items: center;
+}
+
+.accordion-persona .accordion-persona-item-promo img {
+  width: auto;
+  max-width: 100%;
+  height: 16px;
+  aspect-ratio: auto;
+  object-fit: contain;
+  object-position: 0 50%;
+}
+
+.accordion-persona .accordion-persona-item-promo a {
+  color: var(--color-white);
+  font-size: var(--body-font-size-s, 14px);
+  line-height: 20px;
+  text-decoration: underline;
+}
+
+@media (width >= 900px) {
+  .accordion-persona .accordion-persona-item-label > * {
+    line-height: 32px;
+  }
+}
+
+/* wide: horizontal row of cards; the open card grows to twice the width */
+@media (width >= 1200px) {
+  .accordion-persona {
+    --accordion-persona-toggle-size: 48px;
+    --accordion-persona-toggle-bar: 20px;
+
+    /* 32px at the 1440px reference width, slightly tighter on narrower rows */
+    --accordion-persona-card-padding-inline: clamp(24px, 2.25vw, var(--space-xl, 32px));
+
+    flex-direction: row;
+    gap: 12px;
+    height: 600px;
+
+    /* source row sits 16px from the viewport edge, inside the 32px section padding */
+    margin-inline: calc(var(--space-m, 16px) - var(--content-padding-inline, 32px));
+  }
+
+  .accordion-persona .accordion-persona-item {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .accordion-persona .accordion-persona-item[open] {
+    flex-grow: 2;
+  }
+
+  /* keep the closed panel rendered so its photo shows behind the title */
+  .accordion-persona .accordion-persona-item::details-content {
+    content-visibility: visible;
+  }
+
+  /* the whole card is the click target */
+  .accordion-persona .accordion-persona-item-label {
+    position: absolute;
+    inset: 0;
+    padding: var(--space-xl, 32px) var(--accordion-persona-card-padding-inline);
+  }
+
+  .accordion-persona .accordion-persona-item[open] .accordion-persona-item-label {
+    pointer-events: none;
+  }
+
+  .accordion-persona .accordion-persona-item-label::after {
+    top: 50%;
+    right: auto;
+    left: 50%;
+    background-color: rgb(255 255 255 / 24%);
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s;
+  }
+
+  .accordion-persona .accordion-persona-item[open] .accordion-persona-item-label::after {
+    opacity: 0;
+  }
+
+  .accordion-persona .accordion-persona-item-body {
+    position: absolute;
+    inset: 0;
+    padding: calc(var(--space-xl, 32px) * 2.5) var(--accordion-persona-card-padding-inline) var(--space-xl, 32px);
+  }
+
+  .accordion-persona .accordion-persona-item:not([open]) .accordion-persona-item-bg::after {
+    background-image: linear-gradient(rgb(0 0 0 / 60%) 0%, rgb(0 0 0 / 0%) 50%);
+  }
+
+  .accordion-persona .accordion-persona-item-content,
+  .accordion-persona .accordion-persona-item-promo {
+    transition: opacity 0.3s ease-in 0.4s, visibility 0.3s ease-in 0.4s;
+  }
+
+  .accordion-persona .accordion-persona-item-promo {
+    margin-top: auto;
+  }
+
+  .accordion-persona .accordion-persona-item:not([open]) .accordion-persona-item-content,
+  .accordion-persona .accordion-persona-item:not([open]) .accordion-persona-item-promo {
+    visibility: hidden;
+    opacity: 0;
+    transition: none;
+  }
+}
